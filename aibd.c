@@ -37,7 +37,7 @@
 
 static int remote_socks[LISTENING_QUEUE_SIZE];
 static struct input_event events[EVENTS_QUEUE_SIZE];
-static uint32_t buffer[EVENTS_QUEUE_SIZE * 2];
+static uint32_t buffer[EVENTS_QUEUE_SIZE * 2 + 1];
 
 static void usage(char *progname)
 {
@@ -143,7 +143,7 @@ static int input_subsystem_init(void)
     for(i = 1; i <= 248; i++)
         ioctlx(uinput_fd, UI_SET_KEYBIT, i);
 
-    memcpy(uidev.name, "aibd-device", UINPUT_MAX_NAME_SIZE);
+    memcpy(uidev.name, "aibd-device\0", UINPUT_MAX_NAME_SIZE < 12 ? UINPUT_MAX_NAME_SIZE : 12);
     uidev.id.bustype = BUS_USB;
     uidev.id.version = 1;
 

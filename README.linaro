@@ -2,3 +2,4 @@ This is a clone of
 git://github.com/rperier/android_input_bridge
 
 Local modifications:
+- Make it compile on 4.2+ (patch submitted upstream 2012/11/19)
